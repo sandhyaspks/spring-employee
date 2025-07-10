@@ -1,18 +1,20 @@
 package com.example.demo.models;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class Employee {
-    @Id
+@AllArgsConstructor
+public class UserDetailsDto {
     private int empId;
     private String name;
-    private String role;
+    private String email;
+    private String password;
+    private String userName;
+    private Set<String> roleNames;
 }
+
