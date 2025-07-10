@@ -22,8 +22,8 @@ public class EmployeeService {
         return registerDetailsRepository.findById(empId).orElse(new RegisterDetails());
     }
 
-//    public List<RegisterDetails> getEmployeeByJob() {
-//        return registerDetailsRepository.findByRole();
+//    public List<RegisterDetails> getEmployeeByJob(String job) {
+//        return registerDetailsRepository.findByRole(job);
 //    }
 
     public String addEmployee(RegisterDetails employee) {

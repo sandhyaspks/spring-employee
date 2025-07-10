@@ -33,6 +33,7 @@ public class SpringConfiguration {
 //              auth.requestMatchers(HttpMethod.PUT,"/employee").hasRole("ADMIN");
 //              auth.requestMatchers(HttpMethod.DELETE,"/employee").hasRole("ADMIN");
 //              auth.requestMatchers(HttpMethod.GET,"/**").hasAnyRole("ADMIN","USER");
+                    auth.requestMatchers("/api/auth/register","api/auth/login").permitAll();
                     auth.anyRequest().authenticated();
                 })
                 .httpBasic(Customizer.withDefaults());
@@ -51,6 +52,6 @@ public class SpringConfiguration {
 //            .password(passwordEncoder().encode("sandhya"))
 //            .roles("USER")
 //            .build();
-//    return new InMemoryUserDetailsManager(admin,ksp);
+//    return new InMemoryUserDetailsManager(admin,sandhya);
 //  }
 }
