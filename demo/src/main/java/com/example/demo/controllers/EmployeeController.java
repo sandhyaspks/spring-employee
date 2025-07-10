@@ -50,7 +50,6 @@ public class EmployeeController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/employee")
     public String postMethod(@RequestBody RegisterDetails employee){
-//        Employee employee = new Employee(5,"Mani", "Business");
         return employeeService.addEmployee(employee);
     }
 

@@ -6,6 +6,8 @@ import com.example.demo.services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -23,4 +25,14 @@ public class AuthController {
         return authService.authenticate(login);
     }
 
+
+    @PutMapping("/{id}")
+    public String updateEmployee(@PathVariable int id, @RequestBody RegisterDetails emp){
+        return authService.updateEmployee(id,emp);
+    }
+
+    @GetMapping("/roles/{roles}")
+    public List<RegisterDetails> getEmployeeByRole(@PathVariable String roles){
+        return authService.getAllEmployeesByRoleSer(roles);
+    }
 }

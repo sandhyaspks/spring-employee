@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -17,7 +18,7 @@ import java.util.Set;
 public class AuthService {
 
     @Autowired
-    com.example.demo.repository.RegisterDetailsRepository registerDetailsRepository;
+    RegisterDetailsRepository registerDetailsRepository;
 
     @Autowired
     RolesRepository rolesRepository;
@@ -43,6 +44,16 @@ public class AuthService {
         registerDetailsRepository.save(registerDetails);
         return "Employee Added Successfully";
     }
+
+    public String updateEmployee(int id , RegisterDetails registerDetails){
+        registerDetailsRepository.save(registerDetails);
+        return "Employee updated successfully";
+    }
+    public List<RegisterDetails> getAllEmployeesByRoleSer(String role) {
+        return registerDetailsRepository.findByRolesRoleName(role);
+    }
+
+
 
     public String authenticate(RegisterDetails login) {
         RegisterDetails user = registerDetailsRepository.findByEmail(login.getEmail());
