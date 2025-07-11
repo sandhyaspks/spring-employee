@@ -9,20 +9,16 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/todos")
+@RequestMapping("api/todo")
 public class TodoController {
-
     @Autowired
     private TodoService todoService;
-
-    @PostMapping("/assign/{empId}")
-    public ResponseEntity<Todo> assignTodo(@PathVariable int empId, @RequestBody Todo todo) {
-        Todo createdTodo = todoService.assignTaskToEmployee(empId, todo);
-        return ResponseEntity.ok(createdTodo);
+    @PostMapping("/add/{empId}")
+    public String addTodo(@PathVariable int empId, @RequestBody Todo todo) {
+        return todoService.addTodo(empId, todo);
     }
-
     @GetMapping("/employee/{empId}")
-    public ResponseEntity<List<Todo>> getTodosByEmployee(@PathVariable int empId) {
-        return ResponseEntity.ok(todoService.getTodosByEmployee(empId));
-}
+    public List<Todo>getTodos(@PathVariable int empId) {
+        return todoService.getTodosByEmployee(empId);
+    }
 }

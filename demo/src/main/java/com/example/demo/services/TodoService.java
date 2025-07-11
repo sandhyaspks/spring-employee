@@ -10,30 +10,22 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TodoService {
-
-    @Autowired
-    private RegisterDetailsRepository registerRepository;
+public class TodoService{
 
     @Autowired
     private TodoRepository todoRepository;
 
-    public Todo assignTaskToEmployee(int empId, Todo todo) {
-        RegisterDetails user = registerRepository.findById(empId)
-                .orElseThrow(() -> new RuntimeException("Employee not found"));
+    @Autowired
+    private RegisterDetailsRepository registerDetailsRepository;
 
-        boolean hasRequiredRole = user.getRoles().stream()
-                .anyMatch(role -> role.getRoleName().equalsIgnoreCase("DEVELOPER")); // customize as needed
-
-        if (!hasRequiredRole) {
-            throw new RuntimeException("Task can only be assigned to DEVELOPERs");
-        }
-
-        todo.setEmployee(user);
-        return todoRepository.save(todo);
+    public String addTodo(int empId,Todo todo){
+        RegisterDetails employee=registerDetailsRepository.findById(empId)
+                .orElseThrow(()->new RuntimeException("Employee not found: " + empId));
+        todo.setEmployee(employee);
+        todoRepository.save(todo);
+        return "Todo added successfully";
     }
-
-    public List<Todo> getTodosByEmployee(int empId) {
-        return todoRepository.findByEmployeeEmpId(empId);
+    public List<Todo>getTodosByEmployee(int empId) {
+        return todoRepository.findByEmployeeEmpID(empId);
     }
 }
